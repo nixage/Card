@@ -1,0 +1,313 @@
+@import '../../common-style/mixin.scss';
+@import '../../common-style/var.scss';
+
+.padding-top{
+  padding: 100px 0px 0px 0px;
+  @include anim(0.3s,0s);
+  @media (max-width:$md4+px){
+    padding: 50px 0px 0px 0px;
+  }
+}
+
+.rotate-card{
+  .card-front{
+    transform: rotateY(180deg);
+    opacity: 0;
+    visibility: hidden;
+  }
+  .card-back{
+    opacity: 1;
+    visibility: visible;
+    transform: rotateY(360deg);
+  }
+}
+.card {
+  max-width: 435px;
+  height: 235px;
+  position: relative;
+  perspective: 1000px;
+  margin: 0 auto;
+  @media (max-width:$md4+px){
+    height: 210px;
+  }
+  
+  &__body {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.card-front, .card-back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  @include anim(1s,0s);
+}
+
+.card-front{
+  background: linear-gradient(180deg, #0A8196 0%, #0A95AD 98.41%);
+
+  &__body{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 100px 0px 0px 0px;
+    border-radius: inherit;
+    overflow: hidden;
+    @media (max-width:$md4+px){
+      padding: 85px 0px 0px 0px;
+    }
+    &::after{
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #01839C;
+      transform: rotate(-27deg) translateY(178px) scale(1.5);
+      opacity: 0.58;
+    }
+  }
+  
+  &__secure {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    @include anim(0.5s,0s);
+    @media (max-width:$md4+px){
+      left: 22px;
+      top: 22px;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    img{
+      max-width: 100%;
+    }
+  }
+
+  &__form {
+    margin: 0px 50px;
+    @media (max-width:$md4+px){
+      margin: 0px 10px;
+    }
+  }
+
+  &__number {
+    @include flexbox;
+    justify-content: space-between;
+    margin: 0px 0px 25px 0px;
+    position: relative;
+    @media (max-width:$md4+px){
+      justify-content: space-evenly;
+    }
+  }
+
+  &__error{
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 59, 48, 0.48);
+  }
+
+  &__error-number{
+    position: absolute;
+    bottom: -20px;
+  }
+
+  &__date{
+    width: 70px;
+    height: 60px;
+    margin: 0px 0px 0px 145px;
+    text-align: center;
+    position: relative;
+    span{
+      display: inline-block;
+      margin: 4px 0px 0px 0px;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 1px;
+      color: #D8D8D8;
+      opacity: 0.2;
+    }
+    @media (max-width:$md4+px){
+      margin: 0px auto;
+    }
+  }
+  &__error-date{
+    position: absolute;
+    left: 120%;
+    top: 22%;
+  }
+
+  &__button{
+    margin: 15px 15px 0px 0px;
+    text-align: right;
+  }
+}
+
+.card-back{
+  background: linear-gradient(180deg, #50BED1 0%, #25A0B5 98.41%);
+  transform: rotateY(180deg);
+  opacity: 0;
+  visibility: hidden;
+  &::after{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background: #005766;
+  }
+
+  &__body{
+    width: 100%;
+    height: 100%;
+    padding: 100px 100px 0px 0px;
+    margin: 0px 0px 15px 0px;
+  }
+
+  &__form{
+    input{
+      cursor: pointer;
+    }
+  }
+
+  &__cvv{
+    width: 50px;
+    text-align: center;
+    margin-left: auto;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #D8D8D8;
+    span{
+      display: inline-block;
+      margin: 5px 0px 0px 0px;
+      opacity: 0.2;
+    }
+  }
+
+  &__key-board{
+    margin: 20px 80px 30px 80px;
+    @include anim(0.5s,0s);
+    transform-origin: top;
+    @media (max-width:$md4+px){
+      margin: 15px 35px ;
+    }
+  }
+
+  &__buttons{
+    margin: 0px 0px 0px 10px;
+  }
+  &__button-back{
+    @include anim(0.5s,0s);
+    margin: 0px 50px 0px 0px;
+    @media (max-width:$md4+px){
+      margin: 0px 30px 0px 0px;
+    }
+  }
+}
+
+.key-board{
+  position: relative;
+  &__row{
+    @include flexbox;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0px -15px;
+  }
+  &__column{
+    width: calc(100% / 3 - 30px);
+    margin: 0px 15px;
+    @media (max-width:$md4+px){
+      width: calc(100% / 3);
+      margin: 0;
+      @include flexbox;
+      justify-content: center;
+    }
+  }
+  &__button{
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    height: 72px;
+    margin: 0px 0px 20px 0px;
+    background: rgba(216, 216, 216, 0.32);
+    border: 1px solid rgba(0, 87, 102, 0.32);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 32px;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    color: #002B32;
+    cursor: pointer;
+    @include anim(0.5s,0s);
+    @media (max-width:$md4+px){
+      width: 65px;
+      height: 65px;
+      margin: 0px 0px 10px 0px;
+    }
+  }
+  &__remove-number{
+    position: absolute;
+    bottom: 37px;
+    right: 10px;
+    width: 50px;
+    height: 32px;
+    background: #F3F3F3;
+    border: 1px solid rgba(0, 87, 102, 0.32);
+    cursor: pointer;
+    @media (max-width:$md4+px){
+      bottom: 25px;
+    }
+    &::before{
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -15px;
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      transform: rotate(45deg) scale(1.5);
+      border-right: 1px solid rgba(0, 87, 102, 0.32);
+    }
+    &::after{
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: -8px;
+      width: 14px;
+      height: 15px;
+      background-color: #ffffff;
+      transform: rotate(45deg) scale(1.575);
+      border-top: 1px solid rgba(0, 87, 102, 0.32);
+    }
+    span{
+      &::after{
+        content: "\d7";
+        font-size: 25px; 
+        font-weight: 700;
+        color: #363D41;
+        position: absolute;
+        right: 10px;
+        top: 3px;
+      }
+    }
+
+  }
+}
+
+

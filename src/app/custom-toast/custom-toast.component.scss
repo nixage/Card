@@ -1,0 +1,39 @@
+.toast {
+  min-width: 310px;
+  max-width: 335px;
+  height: 86px;
+  padding: 0px 40px 0px 60px;
+  position: fixed;
+  z-index: 100;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFFFFF;
+  border: 1px solid rgba(76, 217, 100, 0.12);
+  box-shadow: 4px 4px 12px rgba(76, 217, 100, 0.25), -4px -4px 4px rgba(76, 217, 100, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::after{
+    content: "\d7";
+    font-size: 25px; 
+    font-weight: 700;
+    color: #363D41;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 30px;
+    left: 18px;
+  }
+
+  &__message {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #363D41;
+  }
+}

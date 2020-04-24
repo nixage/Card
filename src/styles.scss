@@ -1,0 +1,131 @@
+/* You can add global styles to this file, and also import other style files */
+//<МИКСИНЫ>===============================================================================================
+@import './common-style/mixin.scss';
+//</МИКСИНЫ>===============================================================================================
+
+//<ПЕРЕМЕННЫЕ>===========================================================================================================
+@import './common-style/var.scss';
+//</ПЕРЕМЕННЫЕ>===========================================================================================================
+
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===============================================================================================
+@import './common-style/reset.scss';
+//</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===============================================================================================
+
+//<ОБОЛОЧКА>===========================================================================================================
+.wrapper{
+  width: 100%;
+  min-height: 100%;
+}
+//</ОБОЛОЧКА>===========================================================================================================
+
+//<ОСНОВНАЯ СЕТКА>===========================================================================================================
+.container{
+	max-width:$mw+px;
+	margin: 0 auto;
+	width: 100%;
+	@media (max-width:$md1+px){
+		max-width: 970px;
+	}
+	@media (max-width:$md2+px){
+		max-width: 750px;
+	}
+	@media (max-width:$md3+px){
+		max-width: none;padding:0 10px;
+	}
+}
+//</ОСНОВНАЯ СЕТКА>===========================================================================================================
+//<Шрифт по умолчанию>==========================================================================================
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+$fontfamily:"Courier";
+//</Шрифт по умолчанию>==========================================================================================
+body{font-family: $fontfamily;}
+input,button,textarea{font-family: $fontfamily;}
+
+//<Input Card>==========================================================================================
+.card-input{
+  display: inline-block;
+  width: 60px;
+  font-size: 20px;
+  line-height: 23px;
+  color: #FFFFFF;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.323851);
+  text-align: center;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(216, 216, 216, 0.19);
+  padding: 0px 0px 2px 0px;
+  letter-spacing: 1px;
+  @include anim(0.3s,0s);
+  &-date{
+    width: 70px;
+  }
+  &-error{
+    border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+  }
+  &-cvv{
+    width: 50px;
+  }
+  &::placeholder{
+    color: #FFFFFF;
+    opacity: 0.42;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.323851);
+  }
+  &:focus{
+    border-bottom: 2px solid rgba(216, 216, 216, 1);
+  }
+}
+//</Input Card>==========================================================================================
+
+
+//<BUTTONS>====================================================================================================
+.btn{
+	display: inline-block;
+  padding: 10px 0px;
+  width: 100px;
+  border: 2px solid #005766;
+  border-radius: 28px;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #005766;
+  text-transform: uppercase;
+  position: relative;
+  @include anim(0.3s,0s);
+  span{
+    position: relative;
+  }
+  @media (min-width: 992px){
+    &:hover{
+      color: #FFFFFF;
+      &::before{
+        width: 100%;
+        transform: scale(1);
+      }
+    }
+  }
+  &::before{
+    content: '';
+    @include anim(0.35s,0s);
+    position: absolute;
+    top: 0;left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #005766;
+    border-radius: inherit;
+    transform: scale(0);
+  }
+
+  &:disabled{
+    opacity: 0.2;
+    cursor: auto;
+    pointer-events: none;
+  }
+}
+
+//</BUTTONS>====================================================================================================
+
+
+
+

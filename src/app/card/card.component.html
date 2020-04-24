@@ -1,0 +1,101 @@
+<div class="show-message" @fadeAnimation *ngIf="submitedForm">
+  <app-custom-toast></app-custom-toast>
+</div>
+<div class="padding-top">
+  <div class="card">
+    <!-- FRONT CARD -->
+    <div class="card__front card-front">
+      <div class="card-front__body">
+        <div class="card-front__secure">
+          <img src="assets/image/secure.png" alt="">
+        </div>
+        <div class="card-front__logo" @fadeAnimation *ngIf="getCardNumber.controls[0].value.slice(0,1) === '4'">
+          <img src="assets/image/visa-logo.png" alt="">
+        </div>
+        <div class="card-front__logo" @fadeAnimation *ngIf="getCardNumber.controls[0].value.slice(0,1) === '5'">
+          <img src="assets/image/master-logo.png" alt="">
+        </div>
+        <form class="card-front__form" [formGroup]="cardForms">
+          <div class="card-front__number" formArrayName="cardNumber">
+            <ng-container *ngFor="let _ of getCardNumber.controls; let i=index">
+              <input type="text" inputmode="numeric"
+                      [formControlName]="i" 
+                      placeholder="0000" 
+                      class="card-input"
+                      [ngClass]="{'card-input-error': getCardNumber.controls[i].errors && getCardNumber.controls[i].touched}"
+                      (mousedown)="setCaretEndPosition($event)" 
+                      (input)="checkValidNumber($event)"
+                      >  
+            </ng-container>
+            <div class="card-front__error card-front__error-number" @fadeAnimation 
+                        *ngIf="!cardErrors && getCardNumber.controls[0].dirty && 
+                        getCardNumber.controls[0].value.slice(0,1) !== '4' && 
+                        getCardNumber.controls[0].value.slice(0,1) !== '5'">
+              Card only VISA OR MASTERCARD
+            </div>
+            <div class="card-front__error card-front__error-number" @fadeAnimation *ngIf="cardErrors">
+              This field cannot be left empty
+            </div>
+          </div>
+          <div class="card-front__date">
+            <input type="text" inputmode="numeric" 
+                   formControlName="date" 
+                   class="card-input card-input-date"
+                   [ngClass]="{'card-input-error': getCardDate.errors && getCardDate.touched}"
+                   placeholder="00/00" 
+                   (mousedown)="setCaretEndPosition($event)"
+                   (input)="checkValidDate($event)"
+                  >
+            <span>
+              VALID <br> THRU
+            </span>
+            <div class="card-front__error card-front__error-date" @fadeAnimation *ngIf="getCardDate.errors && getCardDate.touched">
+              Date is Incorect
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-front__button">
+        <button class="btn" [disabled]="cardForms.invalid" showBackCard (click)="showBackCard()">
+          <span>Next</span>
+        </button>
+      </div>
+    </div>
+      <!-- FRONT CARD -->
+    
+      <!-- BACK CARD -->
+    <div class="card__back card-back">
+      <div class="card-back__body">
+        <div class="card-back__form">
+          <form [formGroup]="cardForms" >
+            <div class="card-back__cvv">
+              <input type="password" inputmode="numeric"
+                      class="card-input card-input-cvv" 
+                      placeholder="000" 
+                      formControlName="cvv"
+                      (focus)="openKeyBoard($event)"
+                      >
+              <span>CVV</span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card-back__key-board key-board"  @fadeHeightAnimation *ngIf="keyBoardActive">
+        <div class="key-board__row">
+          <div class="key-board__column" *ngFor="let number of randomLists" @fadeAnimation>
+            <div class="key-board__button" (click)="addCvvCode(number)">
+              <span @fadeAnimation>{{number}}</span>
+            </div>
+          </div>
+          <div class="key-board__remove-number" (click)="removeNumber()"><span></span></div>
+        </div>
+      </div>
+  
+      <div class="card-back__buttons">
+          <button class="card-back__button-back btn" showFronCard (click)="showFrontCard()"><span>BACK</span></button>
+          <button class="card-back__button-submit btn" [disabled]="cardForms.invalid" (click)="submitForm()" showFronCard><span>SUBMIT</span></button>
+      </div>
+    </div>
+      <!-- BACK CARD -->
+  </div>
+</div>
